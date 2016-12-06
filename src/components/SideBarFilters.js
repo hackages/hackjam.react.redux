@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
+import {connect} from "react-redux";
+import ActionTypes from "../actions";
 
-const SideBarFilters = ({ navClosed, onChange, closeSideBar, openSideBar }) => {
+const SideBarFilters = ({ navClosed, search, toggleSidebar }) => {
+  const onChange = (input) => search(input.target.value);
   return (
     <div>
       <div className={ !navClosed ? 'filter filter-is-visible': 'filter' }>
@@ -12,19 +15,32 @@ const SideBarFilters = ({ navClosed, onChange, closeSideBar, openSideBar }) => {
 					  </div>
 				  </div>
         </form>
-        <a href="#0" className="close" onClick={ closeSideBar }>Close</a>
+        <a href="#0" className="close" onClick={ toggleSidebar }>Close</a>
       </div>
 
-      <a href="#0" className="filter-trigger" onClick={ openSideBar }>Filters</a>
+      <a href="#0" className="filter-trigger" onClick={ toggleSidebar }>Filters</a>
     </div>
   );
 };
 
 SideBarFilters.propTypes = {
   navClosed: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  closeSideBar: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
+  toggleSidebar: PropTypes.func.isRequired
 };
 
-export default SideBarFilters;
+const mapStateToProps = (state) => ({
+  navClosed: state.navClosed
+});
 
+const mapDispatchToProps = (dispatch) => ({
+  toggleSidebar() {
+    dispatch({type: ActionTypes.TOGGLE_SIDEBAR});
+  },
+  search(value) {
+    dispatch({type: ActionTypes.SEARCH, payload: value});
+  }
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBarFilters);

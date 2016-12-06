@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from "react-redux";
+import ActionTypes from "../actions";
 
 const mapStateToProps = (state) => ({
   selectedFilter: state.selectedFilter
@@ -7,7 +8,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToPros = (dispatch) => ({
   selectFilter(name) {
-    dispatch({type: 'SELECT_FILTER', payload: name});
+    dispatch({type: ActionTypes.SELECT_FILTER, payload: name});
   }
 });
 
@@ -24,7 +25,7 @@ class FilterItems extends React.Component {
 
     const FilterList = filters.map(filter => {
       return (
-          <li key={ filter } onClick={ () => selectFilter(filter) } style={{ display: 'inline-style' }}>
+          <li key={ filter } onClick={ () => selectFilter(filter) } style={{display: 'inline-style'}}>
             <a className={ filter === selectedFilter ? 'selected' : null } href="#0">{ filter }</a>
           </li>
       );
