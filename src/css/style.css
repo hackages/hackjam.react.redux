@@ -1,0 +1,670 @@
+/* --------------------------------
+
+Primary style
+
+-------------------------------- */
+*, *::after, *::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Open Sans", sans-serif;
+  color: #331d35;
+  background-color: #e7e7e7;
+}
+
+a {
+  color: #00A29B;
+  text-decoration: none;
+}
+
+/* --------------------------------
+
+Main Components
+
+-------------------------------- */
+.header {
+  position: relative;
+  height: 300px;
+  background-color: #00A29B;
+  background: url('/img/bg.jpg');
+}
+.header h1 {
+  color: #ffffff;
+  line-height: 300px;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 300;
+}
+
+
+header > .overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  width: 100%;
+  /* height: 100%; */
+  display: block;
+}
+
+
+@media only screen and (min-width: 1170px) {
+  .header {
+    height: 250px;
+  }
+  .header h1 {
+    line-height: 250px;
+  }
+}
+
+.main-content {
+  position: relative;
+  min-height: 100vh;
+}
+.main-content:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.main-content.is-fixed .tab-filter-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.main-content.is-fixed .gallery {
+  padding-top: 76px;
+}
+.main-content.is-fixed .filter {
+  position: fixed;
+  height: 100vh;
+  overflow: hidden;
+}
+.main-content.is-fixed .filter form {
+  height: 100vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.main-content.is-fixed .filter-trigger {
+  position: fixed;
+}
+@media only screen and (min-width: 768px) {
+  .main-content.is-fixed .gallery {
+    padding-top: 90px;
+  }
+}
+@media only screen and (min-width: 1170px) {
+  .main-content.is-fixed .gallery {
+    padding-top: 100px;
+  }
+}
+
+/* --------------------------------
+
+xtab-filter
+
+-------------------------------- */
+.tab-filter-wrapper {
+  background-color: #ffffff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}
+
+.tab-filter-wrapper:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.tab-filter {
+  /* tabbed navigation style on mobile - dropdown */
+  position: relative;
+  height: 50px;
+  width: 140px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.tab-filter::after {
+  /* small arrow icon */
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  bottom: auto;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("/img/icon-arrow.svg") no-repeat center center;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.tab-filter ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: inset 0 -2px 0 #00A29B;
+}
+
+.tab-filter li {
+  display: none;
+}
+
+.tab-filter li:first-child {
+  /* this way the placehodler is alway visible */
+  display: block;
+}
+
+.tab-filter a {
+  display: block;
+  /* set same size of the .tab-filter */
+  height: 50px;
+  width: 140px;
+  line-height: 50px;
+  padding-left: 14px;
+}
+
+.tab-filter a.selected {
+  background: #00A29B;
+  color: #ffffff;
+}
+
+.tab-filter.is-open::after {
+  /* small arrow rotation */
+  -webkit-transform: translateY(-50%) rotate(-180deg);
+  -moz-transform: translateY(-50%) rotate(-180deg);
+  -ms-transform: translateY(-50%) rotate(-180deg);
+  -o-transform: translateY(-50%) rotate(-180deg);
+  transform: translateY(-50%) rotate(-180deg);
+}
+
+.tab-filter.is-open ul {
+  box-shadow: inset 0 -2px 0 #00A29B, 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tab-filter.is-open ul li {
+  display: block;
+}
+
+.tab-filter.is-open .placeholder a {
+  /* reduces the opacity of the placeholder on mobile when the menu is open */
+  opacity: .4;
+}
+
+@media only screen and (min-width: 768px) {
+  .tab-filter {
+    /* tabbed navigation style on medium devices */
+    width: auto;
+    cursor: auto;
+  }
+  .tab-filter::after {
+    /* hide the arrow */
+    display: none;
+  }
+  .tab-filter ul {
+    background: transparent;
+    position: static;
+    box-shadow: none;
+    text-align: center;
+  }
+  .tab-filter li {
+    display: inline-block;
+  }
+  .tab-filter li.placeholder {
+    display: none !important;
+  }
+  .tab-filter a {
+    display: inline-block;
+    padding: 0 1em;
+    width: auto;
+    color: #9a9a9a;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  .no-touch .tab-filter a:hover {
+    color: #00A29B;
+  }
+  .tab-filter a.selected {
+    background: transparent;
+    color: #00A29B;
+    /* create border bottom using box-shadow property */
+    box-shadow: inset 0 -2px 0 #00A29B;
+  }
+  .tab-filter.is-open ul li {
+    display: inline-block;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .tab-filter {
+    /* tabbed navigation on big devices */
+    width: 100%;
+    float: right;
+    margin: 0;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    transition: width 0.3s;
+  }
+  .tab-filter.filter-is-visible {
+    /* reduce width when filter is visible */
+    width: 80%;
+  }
+}
+
+/* --------------------------------
+
+xgallery
+
+-------------------------------- */
+.gallery {
+  padding: 26px 5%;
+  width: 100%;
+}
+
+.gallery li {
+  margin-bottom: 1.6em;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 0.5em;
+}
+.gallery li.gap {
+  /* used in combination with text-align: justify to align gallery elements */
+  opacity: 0;
+  height: 0;
+  display: inline-block;
+}
+.gallery img {
+  display: block;
+  width: 100%;
+}
+.gallery .fail-message {
+  display: none;
+  text-align: center;
+}
+@media only screen and (min-width: 768px) {
+  .gallery {
+    padding: 40px 3%;
+  }
+  .gallery ul {
+    text-align: justify;
+  }
+  .gallery ul:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .gallery li {
+    width: 48%;
+    height: auto;
+    /*max-height: 417px;*/
+    /*margin-bottom: 2em;*/
+  }
+}
+@media only screen and (min-width: 1170px) {
+  .gallery {
+    padding: 50px 2%;
+    float: right;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    transition: width 0.3s;
+  }
+  .gallery li {
+    width: 23%;
+  }
+  .gallery.filter-is-visible {
+    /* reduce width when filter is visible */
+    width: 80%;
+  }
+}
+
+/* --------------------------------
+
+xfilter
+
+-------------------------------- */
+.filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 4px 4px 20px transparent;
+  z-index: 2;
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -o-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-transition: -webkit-transform 0.3s, box-shadow 0.3s;
+  -moz-transition: -moz-transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.filter::before {
+  /* top colored bar */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background-color: #00A29B;
+  z-index: 2;
+}
+.filter form {
+  padding: 70px 20px;
+}
+.filter .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px;
+  line-height: 50px;
+  width: 60px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  text-align: center;
+  background: #00796B;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  z-index: 3;
+}
+.no-touch .filter .close:hover {
+  background: #32255f;
+}
+.filter.filter-is-visible {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+}
+.filter.filter-is-visible .close {
+  opacity: 1;
+}
+@media only screen and (min-width: 1170px) {
+  .filter {
+    width: 20%;
+  }
+  .filter form {
+    padding: 70px 10%;
+  }
+}
+
+.filter-trigger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  line-height: 50px;
+  width: 60px;
+  /* image replacement */
+  overflow: hidden;
+  text-indent: 100%;
+  color: transparent;
+  white-space: nowrap;
+  background: transparent url("/img/icon-filter.svg") no-repeat center center;
+  z-index: 3;
+}
+.filter-trigger.filter-is-visible {
+  pointer-events: none;
+}
+@media only screen and (min-width: 1170px) {
+  .filter-trigger {
+    width: auto;
+    left: 2%;
+    text-indent: 0;
+    color: grey;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding-left: 24px;
+    background-position: left center;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
+  }
+  .no-touch .filter-trigger:hover {
+    color: #00A29B;
+  }
+  .filter-trigger.filter-is-visible, .filter-trigger.filter-is-visible:hover {
+    color: #ffffff;
+  }
+}
+
+/* --------------------------------
+
+xcustom form elements
+
+-------------------------------- */
+.filter-block {
+  margin-bottom: 1.6em;
+}
+.filter-block h4 {
+  /* filter block title */
+  position: relative;
+  margin-bottom: .2em;
+  padding: 10px 0 10px 20px;
+  color: #9a9a9a;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.3rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.no-touch .filter-block h4:hover {
+  color: #00A29B;
+}
+.filter-block h4::before {
+  /* arrow */
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: url("/img/icon-arrow.svg") no-repeat center center;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: -webkit-transform 0.3s;
+  -moz-transition: -moz-transform 0.3s;
+  transition: transform 0.3s;
+}
+.filter-block h4.closed::before {
+  -webkit-transform: translateY(-50%) rotate(-90deg);
+  -moz-transform: translateY(-50%) rotate(-90deg);
+  -ms-transform: translateY(-50%) rotate(-90deg);
+  -o-transform: translateY(-50%) rotate(-90deg);
+  transform: translateY(-50%) rotate(-90deg);
+}
+.filter-block input, .filter-block select,
+.filter-block .radio-label::before,
+.filter-block .checkbox-label::before {
+  /* shared style for input elements */
+  font-family: "Open Sans", sans-serif;
+  border-radius: 0;
+  background-color: #ffffff;
+  border: 2px solid #e6e6e6;
+}
+.filter-block input[type='search'],
+.filter-block input[type='text'],
+.filter-block select {
+  width: 100%;
+  padding: .8em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  box-shadow: none;
+}
+.filter-block input[type='search']:focus,
+.filter-block input[type='text']:focus,
+.filter-block select:focus {
+  outline: none;
+  background-color: #ffffff;
+  border-color: #00A29B;
+}
+.filter-block input[type='search'] {
+  /* custom style for the search element */
+  border-color: transparent;
+  background-color: #e6e6e6;
+  /* prevent jump - ios devices */
+  font-size: 1.6rem !important;
+}
+.filter-block input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}
+.filter-block .select {
+  /* select element wrapper */
+  position: relative;
+}
+.filter-block .select::after {
+  /* switcher arrow for select element */
+  content: '';
+  position: absolute;
+  z-index: 1;
+  right: 14px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url("/img/icon-arrow.svg") no-repeat center center;
+  pointer-events: none;
+}
+.filter-block select {
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+.filter-block select::-ms-expand {
+  display: none;
+}
+.filter-block .list li {
+  position: relative;
+  margin-bottom: .8em;
+}
+.filter-block .list li:last-of-type {
+  margin-bottom: 0;
+}
+.filter-block input[type=radio],
+.filter-block input[type=checkbox] {
+  /* hide original check and radio buttons */
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  z-index: 2;
+}
+.filter-block .checkbox-label,
+.filter-block .radio-label {
+  padding-left: 24px;
+  font-size: 1.4rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.filter-block .checkbox-label::before, .filter-block .checkbox-label::after,
+.filter-block .radio-label::before,
+.filter-block .radio-label::after {
+  /* custom radio and check boxes */
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.filter-block .checkbox-label::before,
+.filter-block .radio-label::before {
+  width: 16px;
+  height: 16px;
+  left: 0;
+}
+.filter-block .checkbox-label::after,
+.filter-block .radio-label::after {
+  /* check mark - hidden */
+  display: none;
+}
+.filter-block .checkbox-label::after {
+  /* check mark style for check boxes */
+  width: 16px;
+  height: 16px;
+  background: url("/img/icon-check.svg") no-repeat center center;
+}
+.filter-block .radio-label::before,
+.filter-block .radio-label::after {
+  border-radius: 50%;
+}
+.filter-block .radio-label::after {
+  /* check mark style for radio buttons */
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  left: 5px;
+}
+.filter-block input[type=radio]:checked + label::before,
+.filter-block input[type=checkbox]:checked + label::before {
+  border-color: #00A29B;
+  background-color: #00A29B;
+}
+.filter-block input[type=radio]:checked + label::after,
+.filter-block input[type=checkbox]:checked + label::after {
+  display: block;
+}
+
+@-moz-document url-prefix() {
+  /* hide custom arrow on Firefox - select element */
+  .filter-block .select::after {
+    display: none;
+  }
+}
