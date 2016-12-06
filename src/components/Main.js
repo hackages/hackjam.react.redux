@@ -5,19 +5,7 @@ import books from '../mocks/books';
 import BookList from './BookList';
 import SideBarFilters from './SideBarFilters';
 import FilterMenu from './FilterMenu';
-import {connect} from "react-redux";
 
-const mapStateToProps = (state) => ({
-  selectedFilter: state.selectedFilter
-});
-
-const mapDispatchToPros = (dispatch) => ({
-  dispatchNewFilter(name) {
-    dispatch({type: 'SELECT_FILTER', payload: name});
-  }
-});
-
-@connect(mapStateToProps, mapDispatchToPros)
 class Main extends Component {
   constructor () {
     super();
@@ -25,16 +13,6 @@ class Main extends Component {
       books,
       navClosed: true,
     };
-  }
-
-  @autobind
-  selectTab (category) {
-    this.props.dispatchNewFilter(category);
-    this.setState({
-     books: category === 'All'? books : books.filter( book => {
-      return book.category === category;
-     }),
-    });
   }
 
   @autobind
@@ -65,7 +43,7 @@ class Main extends Component {
     return (
      <main className="main-content">
 
-      <FilterMenu selectedFilter={ this.props.selectedFilter } filters={ filters } selectTab={ this.selectTab }/>
+      <FilterMenu filters={ filters } />
 
       <BookList books={ books } navClosed={ navClosed }/>
 
