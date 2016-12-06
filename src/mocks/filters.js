@@ -1,9 +1,9 @@
 const filters = [
-  { category: 'All', selected: true},
-  { category: 'Web', selected: false},
-  { category: 'Mobile', selected: false},
-  { category: 'IoT', selected: false},
-  { category: 'Data Engineering', selected: false},
+  'All',
+  'Web',
+  'Mobile',
+  'IoT',
+  'Data Engineering',
 ];
 
 export default filters;

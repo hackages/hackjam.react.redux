@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 
-const FilterItems = ({ filters, selectTab }) => {
+
+const FilterItems = ({ filters, selectedFilter, selectTab }) => {
 
   const FilterList = filters.map(filter => {
     return (
-      <li key={ filter.category } onClick={ () => selectTab(filter.category) } style={{ display: 'inline-style' }}>
-        <a className={ filter.selected ? 'selected': '' } href="#0">{ filter.category }</a>
+      <li key={ filter } onClick={ () => selectTab(filter) } style={{ display: 'inline-style' }}>
+        <a className={ filter === selectedFilter ? 'selected' : null } href="#0">{ filter }</a>
       </li>
     );
   });
@@ -21,7 +22,8 @@ const FilterItems = ({ filters, selectTab }) => {
 };
 
 FilterItems.propTypes = {
-  filters: PropTypes.array.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedFilter: PropTypes.string,
   selectTab: PropTypes.func.isRequired,
 };
 

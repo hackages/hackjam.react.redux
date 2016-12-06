@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import FilterItems from './FilterItems';
 
-const FilterMenu = ({ selectTab, filters }) => {
+const FilterMenu = ({ selectTab, selectedFilter, filters }) => {
   return (
     <div className="tab-filter-wrapper">
       <div className="tab-filter">
-        <FilterItems filters={ filters } selectTab={ selectTab } />
+        <FilterItems selectedFilter={ selectedFilter } filters={ filters } selectTab={ selectTab } />
       </div>
 	  </div>
   );
@@ -13,8 +13,8 @@ const FilterMenu = ({ selectTab, filters }) => {
 
 FilterMenu.propTypes = {
   selectTab: PropTypes.func.isRequired,
-  filters: PropTypes.array.isRequired,
+  selectedFilter: PropTypes.string,
+  filters: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default FilterMenu;
-
