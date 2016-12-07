@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import {connect} from "react-redux";
 import ActionTypes from "../actions";
 
-const SideBarFilters = ({ navClosed, search, toggleSidebar }) => {
+const SideBarFilters = ({ navClosed, search, searchValue, toggleSidebar }) => {
   const onChange = (input) => search(input.target.value);
   return (
     <div>
@@ -11,7 +11,7 @@ const SideBarFilters = ({ navClosed, search, toggleSidebar }) => {
 				  <div className="filter-block">
 					  <h4>Search</h4>
 					  <div className="filter-content">
-						  <input type="search" placeholder="title, price..." onChange={ onChange }/>
+						  <input type="search" placeholder="title, price..." value={searchValue || ''} onChange={ onChange }/>
 					  </div>
 				  </div>
         </form>
@@ -26,10 +26,12 @@ const SideBarFilters = ({ navClosed, search, toggleSidebar }) => {
 SideBarFilters.propTypes = {
   navClosed: PropTypes.bool.isRequired,
   search: PropTypes.func.isRequired,
+  searchValue: PropTypes.string,
   toggleSidebar: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  searchValue: state.searchValue,
   navClosed: state.navClosed
 });
 
