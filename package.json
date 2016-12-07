@@ -12,6 +12,7 @@
     "redux": "^3.6.0"
   },
   "scripts": {
+    "prestart": "npm install",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
